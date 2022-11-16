@@ -122,21 +122,73 @@ INSERT INTO contacts(first_name,last_name,email)
 VALUES ('John','Doe','john.doe@gmail.com');
 
 # Default constraint:
+se utiliza para definir valores predeterminados para una columna. En general, en la restricción predeterminada de SQLite, se insertará el valor predeterminado en una columna en caso de que el valor de la columna sea nulo o esté vacío.
+
+Podemos añadir una restricción predeterminada en la columna mientras creamos una nueva tabla usando Crear instrucción o modificando/alterando la tabla usando la instrucción ALTER. Ejemplo:
+
+CREATE TABLE BOOK
+
+(Book_id INTEGER PRIMARY KEY,
+
+Book_name TEXT NOT NULL,
+
+Price INTEGER DEFAULT 100);
 
 
 # Check constraint:
+La restricción CHECK habilita una condición para verificar el valor que se ingresa en un registro. Si la condición se evalúa como falsa, el registro viola la restricción y no se ingresa en la tabla.
+
+Ejemplo:
+El siguiente SQL crea una nueva tabla llamada CLIENTES y agrega cinco columnas. Aquí, agregamos un CHEQUE con la columna EDAD, para que no pueda tener ningún CLIENTE menor de 18 años −
+
+CREATE TABLE COMPANY(
+   ID   INT       PRIMARY KEY     ,
+   NAME          TEXT     NOT NULL,
+   AGE  INT              NOT NULL UNIQUE,
+   ADDRESS  CHAR (25) ,
+   SALARY   REAL  ,       
+   
+);
+Si la tabla EMPRESA ya se ha creado, entonces para agregar una restricción CHECK a la columna EDAD, escribiría una declaración similar a la siguiente:
+
+ALTER TABLE COMPANY
+   MODIFY AGE INT NOT NULL CHECK (AGE >= 18 );
 
 
 # Alter table:
+Este comando nos permite modificar una tabla existente sin realizar un volcado completo y recargar los datos. Puede cambiar el nombre de una tabla usando la declaración ALTER TABLE y se pueden agregar columnas adicionales en una tabla existente usando la declaración ALTER TABLE.
 
+No hay otra operación compatible con el comando ALTER TABLE en SQLite, excepto cambiar el nombre de una tabla y agregar una columna en una tabla existente.
+
+Sintaxis:
+ALTER TABLE database_name.table_name RENAME TO new_table_name;
 
 # Delete:
+Se utiliza para eliminar los registros existentes de una tabla. Puede usar la cláusula WHERE con la consulta DELETE para eliminar las filas seleccionadas; de lo contrario, se eliminarían todos los registros.
 
+Sintaxis:
+DELETE FROM table_name
+WHERE [condition];
 
 # Drop:
+La instrucción DROP TABLE se usa para eliminar una definición de tabla y todos los datos, índices, activadores, restricciones y especificaciones de permisos asociados para esa tabla.
 
+Debe tener cuidado al usar este comando porque una vez que se elimina una tabla, toda la información disponible en la tabla también se perderá para siempre.
+
+Sintaxis:
+DROP TABLE database_name.table_name;
 
 # Backup:
+El shell de la línea de comandos de SQLite proporciona el comando .backup dot que le permite realizar copias de seguridad de una base de datos de forma rápida y sencilla.
 
+Para usar este comando, proporcione el nombre de la base de datos que desea respaldar y un nombre de archivo para el archivo de respaldo.
+Ejemplo:
+.backup Store Store_backup.db
 
 # Restore:
+El comando .restore realiza una copia de bajo nivel de un archivo de base de datos en una base de datos abierta o adjunta. Si no se proporciona el nombre de la base de datos, se completará la base de datos principal. Este comando se usa con frecuencia para llenar una base de datos en memoria activa desde un archivo de base de datos. Es seguro ejecutar este comando en una base de datos de origen activa (aunque es posible que no funcione).
+
+Sintaxis:
+.restore [database_name] filename
+
+
